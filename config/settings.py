@@ -19,11 +19,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'blog.apps.BlogConfig',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'blog.apps.BlogConfig',# 추가 생성되는 모델사용 앱은 migtragion과 migrate를 해줘야함
+    'django.contrib.admin',#
+    'django.contrib.auth',#
+    'django.contrib.contenttypes',#
+    'django.contrib.sessions',# 위 네가지 앱은 기본적으로 migrate를 구동해서 테이블을 생성해 줘야함
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
