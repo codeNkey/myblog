@@ -198,3 +198,24 @@
   </div>
 </footer>
 {% endblock %}
+{% block extra-script %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+<script>
+  const PostListApp = {
+    delimiters: ['[[',']]'],//vue와 django 템플릿 충돌방지
+    data(){
+      return {
+        postList: []// post 목록 데이터를 저장할 변수
+      }
+    },
+    created(){
+
+    },
+    methods: {
+      
+    },
+  }
+</script>
+{% endblock %}
+
