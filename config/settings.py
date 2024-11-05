@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig',
     'blog.apps.BlogConfig',# 추가 생성되는 모델사용 앱은 migtragion과 migrate를 해줘야함
     'django.contrib.admin',#
     'django.contrib.auth',#
