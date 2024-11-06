@@ -1,9 +1,9 @@
 from django.http import JsonResponse
 from django.views.generic.list import BaseListView
-from .utils import obj_to_post
-from blog.models import Post
+from .utils import obj_to_post,prev_next_post
+from blog.models import Post,Tag,Category
 from django.views.generic.detail import BaseDetailView
-
+from django.views import View
 class ApiPostLV(BaseListView):
   model = Post
   def render_to_response(self, context, **response_kwargs):# index.html의 axios.get에서 가져옴
@@ -16,6 +16,23 @@ class ApiPostDV(BaseDetailView):
   def render_to_response(self, context, **response_kwargs):
     obj = context['object']
     post = obj_to_post(obj)
-    return JsonResponse(data=post, safe=True, status=200)
+    prevPost, nextPost = prev_next_post(obj)
+    jsonData = {
+      'post': post,
+      'prevPost': prevPost,
+      'nextPost': nextPost,
+    }
+    return JsonResponse(data=jsonData, safe=True, status=200)
                 
-  
+class ApiCateTagView(View):
+  def get(self, request, *args, **kwargs):
+    qs1 = Category.objects.all()
+    qs2 = Tag.objects.all()
+    cateList = [cate.name for cate in qs1]
+    tagList = [tag.name for tag in qs2]
+    jsonDate = {
+      'cateList': cateList,
+      'tagList': tagList,
+
+    }
+    return JsonResponse(data=jsonDate, safe=True, status=200)
