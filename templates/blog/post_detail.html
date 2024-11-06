@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
+{% block extra-style %}
+<style>
+  .my-image-h300 {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  .my-content {
+    font-style:bold;
 
+  }
+</style>
+{% endblock %}
 {% block content %}
 <section class="page-section" id="post">
 <div class="container mt-5">
@@ -33,16 +45,12 @@
                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
                 </header>
                 <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+                <figure class="mb-4"><img class="img-fluid rounded my-image-h300" :src='post.image' alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe.</p>
-                    <p class="fs-5 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                    <p class="fs-5 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                    <h2 class="fw-bolder mb-4 mt-5">I have odd cosmic thoughts every day</h2>
-                    <p class="fs-5 mb-4">For me, the most fascinating interface is Twitter. I have odd cosmic thoughts every day and I realized I could hold them to myself or share them with people who might be interested.</p>
-                    <p class="fs-5 mb-4">Venus has a runaway greenhouse effect. I kind of want to know what happened there because we're twirling knobs here on Earth without knowing the consequences of it. Mars once had running water. It's bone dry today. Something bad happened there as well.</p>
+                  <p class='fs-5 mb-5 my-content'>[[post.content]]</p>
                 </section>
+
             </article>
             <!-- Comments section-->
             <section class="mb-5">
@@ -140,38 +148,6 @@
 {% endblock %} 
 
 {% block extra-script %}
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
-<script>
-  const PostDetailApp = {
-    delimiters: ['[[',']]'],//vue와 django 템플릿 충돌방지
-    data(){
-      return {
-        post: {}
-      }
-    },
-    created(){// 컴포넌트를 생성하는 단계
-      console.log('created()...')
-      const postId = location.pathname.split('/')[3]
-      this.fetchPostDetail(postId)
-    },
-    methods: {
-      fetchPostDetail(postId) {
-        console.log('fetchPostDetail()...',postId)
+{% include 'include/post_detail_vue.html' %}
 
-        axios.get(`/api/post/${postId}`)//장고에게 가는 request api로 감
-        .then(res => {//postList에 api에서 받은 데이터를 넣겠다
-          console.log("FETCH POSTDETAIL GET RES", res)
-          this.post = res.data;
-          console.log(this.post.update_date)
-        })
-        .catch(err => {//axios가 실패했을 때 작동 성공하면 then 실패하면 catch 
-          console.log("FETCH POSTLIST GET ERR.RESPONSE", err.reponse)// 실패하면 에러메시지를 콘솔에 찍어라
-          alert(`${err.response.status}${err.response.statusText}`)
-        })
-      }
-    },
-  }
-Vue.createApp(PostDetailApp).mount('#page-top')  
-</script>
 {% endblock %}

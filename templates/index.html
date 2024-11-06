@@ -146,35 +146,6 @@
 </footer>
 {% endblock %}
 {% block extra-script %}
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
-<script>
-  const PostListApp = {
-    delimiters: ['[[',']]'],//vue와 django 템플릿 충돌방지
-    data(){
-      return {
-        postList: []// post 목록 데이터를 저장할 변수
-      }
-    },
-    created(){// 컴포넌트를 생성하는 단계
-      console.log('created()...')
-      this.fetchPostList()
-    },
-    methods: {
-      fetchPostList() {
-        axios.get('/api/post/list')//장고에게 가는 request api로 감
-        .then(res => {//postList에 api에서 받은 데이터를 넣겠다
-          console.log("FETCH POSTLIST GET RES", res)
-          this.postList = res.data;
-        })
-        .catch(err => {//axios가 실패했을 때 작동 성공하면 then 실패하면 catch 
-          console.log("FETCH POSTLIST GET ERR.RESPONSE", err.reponse)// 실패하면 에러메시지를 콘솔에 찍어라
-          alert(`${err.response.status}${err.response.statusText}`)
-        })
-      }
-    },
-  }
-Vue.createApp(PostListApp).mount('#page-top')  
-</script>
+{% include 'include/post_list_vue.html' %}
 {% endblock %}
 
