@@ -92,7 +92,7 @@
                         <div class="card-header">Categories</div>
                         <div class="card-body">
                             <span v-for="(category, index) in cateList" :key="category.id">
-                              <span v-if="index !==0" &emsp;></span>
+                              <span v-if="index !==0" >&emsp;</span>
                               <span class='text-success my-link'>[[category]]</span>
                             </span>
                             
@@ -102,8 +102,10 @@
                     <div class="card mb-4">
                         <div class="card-header">tags</div>
                         <div class="card-body">
-                            <div class="row">
-                            </div>
+                          <span v-for="(tag, index) in tagList" :key="tag.id">
+                            <span v-if="index !==0" >&emsp;</span>
+                            <span class='text-success my-link'>[[tag]]</span>
+                          </span>
                         </div>
                     </div>
                 </div>
