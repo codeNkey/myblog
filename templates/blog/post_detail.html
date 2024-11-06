@@ -11,14 +11,17 @@
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">Welcome to Blog Post!</h1>
+                    <h1 class="fw-bolder mb-1">[[post.title]]</h1>
                     <hr>
                     <p>
-                        <span>2024-11-05&ensp;</span>
+                        <span>[[post.update_date]]&ensp;</span>
                         <i class="fas fa-copyright"></i>&nbsp;
                         <span>IT&ensp;</span>
                         <i class="fas fa-tag"></i>&nbsp;
-                        <span>Django Python&ensp;</span>
+                        <span v-for='(tag, index) in post.tags' :key="index">
+                          <span v-if='index !==0'>,</span>
+                          <span>[[tag]]</span>
+                        </span>
                         <i class="fas fa-heart"></i>&nbsp;
                         <span>5 &nbsp;</span>
                     </p>
@@ -112,7 +115,7 @@
                         
                     </div>
                 </div>
-          </div>
+            </div>
     </div>
 </div>
 {% endblock %}
@@ -135,3 +138,40 @@
     </div>
 </footer>
 {% endblock %} 
+
+{% block extra-script %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+<script>
+  const PostDetailApp = {
+    delimiters: ['[[',']]'],//vue와 django 템플릿 충돌방지
+    data(){
+      return {
+        post: {}
+      }
+    },
+    created(){// 컴포넌트를 생성하는 단계
+      console.log('created()...')
+      const postId = location.pathname.split('/')[3]
+      this.fetchPostDetail(postId)
+    },
+    methods: {
+      fetchPostDetail(postId) {
+        console.log('fetchPostDetail()...',postId)
+
+        axios.get(`/api/post/${postId}`)//장고에게 가는 request api로 감
+        .then(res => {//postList에 api에서 받은 데이터를 넣겠다
+          console.log("FETCH POSTDETAIL GET RES", res)
+          this.post = res.data;
+          console.log(this.post.update_date)
+        })
+        .catch(err => {//axios가 실패했을 때 작동 성공하면 then 실패하면 catch 
+          console.log("FETCH POSTLIST GET ERR.RESPONSE", err.reponse)// 실패하면 에러메시지를 콘솔에 찍어라
+          alert(`${err.response.status}${err.response.statusText}`)
+        })
+      }
+    },
+  }
+Vue.createApp(PostDetailApp).mount('#page-top')  
+</script>
+{% endblock %}
