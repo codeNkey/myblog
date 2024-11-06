@@ -1,0 +1,180 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}index.html{% endblock %} 
+{% block extra-style %}
+<style>
+  .my-img-h300 {
+    width: 100%;
+    height: 300px;
+    object-fit: fit;
+
+  }
+  .my-post-title {
+    height: 60px;
+
+  }
+</style>
+{% endblock %}
+{% block content %}
+<section class="page-section bg-light" id="portfolio">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">Portfolio</h2>
+      <h3 class="section-subheading text-muted">
+        Lorem ipsum dolor sit amet consectetur.
+      </h3>
+    </div>
+    <div class="row">
+      <div v-for="post in postList" :key="post.id" class="col-lg-4 col-sm-6 mb-4">
+          <div class="portfolio-item">
+              <a class="portfolio-link" :href="`/blog/post/${post.id}/#post`">
+                  <div class="portfolio-hover">
+                      <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                  </div>
+                  <img class="img-fluid my-img-h300" :src="post.image" alt="..." />
+              </a>
+              <div class="portfolio-caption">
+                <div class="portfolio-caption-heading my-post-title">[[ post.title ]]</div>
+                  <div class="portfolio-caption-subheading text-muted">[[ post.category ]]</div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  </div>
+</section>
+<section class="page-section bg-light" id="team">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-heading text-uppercase">IAM</h2>
+      <h3 class="section-subheading text-muted">소개</h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="team-member">
+          <img
+            class="mx-auto rounded-circle"
+            src="{% static 'assets/img/team/dev.png' %}"
+            alt="..."
+          />
+          <h4>Python</h4>
+          <p class="text-muted">부천그린컴퓨터 학원 수강생</p>
+          <a
+            class="btn btn-dark btn-social mx-2"
+            href="#!"
+            aria-label="Parveen Anand Twitter Profile"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a
+            class="btn btn-dark btn-social mx-2"
+            href="#!"
+            aria-label="Parveen Anand Facebook Profile"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a
+            class="btn btn-dark btn-social mx-2"
+            href="#!"
+            aria-label="Parveen Anand LinkedIn Profile"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div>
+          <p class="fw-bold">[ 부천그린 컴퓨터 학원]</p>
+
+          <p class="fs-3">LLM을 활용한 풀스택 과정</p>
+        </div>
+
+        <div>
+          <p class="fw-bold">[안녕하세요]</p>
+
+          <p class="fs-3">네 안녕하세요!</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <p class="large text-muted">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          Aut eaque, laboriosam veritatis, quos non quis ad
+          perspiciatis, totam corporis ea, alias ut unde.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} 
+{% block footer %}
+<!-- Footer-->
+<footer class="footer py-4">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-4 text-lg-start">
+        Copyright &copy; Your Website 2023
+      </div>
+      <div class="col-lg-4 my-3 my-lg-0">
+        <a
+          class="btn btn-dark btn-social mx-2"
+          href="#!"
+          aria-label="Twitter"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a
+          class="btn btn-dark btn-social mx-2"
+          href="#!"
+          aria-label="Facebook"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+        <a
+          class="btn btn-dark btn-social mx-2"
+          href="#!"
+          aria-label="LinkedIn"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a class="link-dark text-decoration-none me-3" href="#!"
+          >Privacy Policy</a
+        >
+        <a class="link-dark text-decoration-none" href="#!"
+          >Terms of Use</a
+        >
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}
+{% block extra-script %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+<script>
+  const PostListApp = {
+    delimiters: ['[[',']]'],//vue와 django 템플릿 충돌방지
+    data(){
+      return {
+        postList: []// post 목록 데이터를 저장할 변수
+      }
+    },
+    created(){// 컴포넌트를 생성하는 단계
+      console.log('created()...')
+      this.fetchPostList()
+    },
+    methods: {
+      fetchPostList() {
+        axios.get('/api/post/list')//장고에게 가는 request api로 감
+        .then(res => {//postList에 api에서 받은 데이터를 넣겠다
+          console.log("FETCH POSTLIST GET RES", res)
+          this.postList = res.data;
+        })
+        .catch(err => {//axios가 실패했을 때 작동 성공하면 then 실패하면 catch 
+          console.log("FETCH POSTLIST GET ERR.RESPONSE", err.reponse)// 실패하면 에러메시지를 콘솔에 찍어라
+          alert(`${err.response.status}${err.response.statusText}`)
+        })
+      }
+    },
+  }
+Vue.createApp(PostListApp).mount('#page-top')  
+</script>
+{% endblock %}
+

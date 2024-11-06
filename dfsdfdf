@@ -1,0 +1,83 @@
+[33mcommit 98380ac3f17eba23169b6ce3ccbdd424e34e6616[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Wed Nov 6 12:57:58 2024 +0900
+
+    점심시간
+
+[33mcommit b7555a03becb58e587cdc68bcdbc01e9b7c4bee1[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Wed Nov 6 12:28:07 2024 +0900
+
+    vue 추가
+
+[33mcommit 0884681c04bbec8c4fbb84bc0bad91ced67a5657[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Tue Nov 5 16:59:21 2024 +0900
+
+    vue가 작동한다
+
+[33mcommit bfd6aea9776c04ad83ca7d9424cdc19c553d290e[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Tue Nov 5 15:57:57 2024 +0900
+
+    utils.py 생성
+
+[33mcommit 084e0b29330ff601f30b16d972f47c4c1843f0fc[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Tue Nov 5 15:39:39 2024 +0900
+
+    다시 myblog로
+
+[33mcommit 12a4d7d6e05e19913b89dd38fa9b6814299e3460[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Tue Nov 5 15:24:53 2024 +0900
+
+    test폴더에 첫시험
+
+[33mcommit ed2c3acb085b65d6981303513be1966a82db0de1[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Tue Nov 5 15:16:34 2024 +0900
+
+    status 매개변수 지정
+
+[33mcommit c9d748b47a1e20265f87cd9ac83a93899ba574a1[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Tue Nov 5 14:51:13 2024 +0900
+
+    api 앱 생성
+
+[33mcommit a95914a209d4c4cf5a90ac9cef0915ca0bbed577[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Tue Nov 5 14:13:01 2024 +0900
+
+    노란색 제거 커밋
+
+[33mcommit 78426cc6e74f21b8b14888225882a76a056cd76c[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Tue Nov 5 11:34:40 2024 +0900
+
+    이미지 수정 저장 경로
+
+[33mcommit b525322da454dd79bd83ebeb6d0c9fe23dda0463[m
+Author: heejin <heejin2dat@naver.com>
+Date:   Tue Nov 5 08:33:28 2024 +0900
+
+    '주석보강'
+
+[33mcommit d9e2d849170fc2b8b6369efabb3678602c0552b7[m
+Author: heejin <heejin2dat@naver.com>
+Date:   Mon Nov 4 23:32:18 2024 +0900
+
+    첫 블로그 커밋
+
+[33mcommit 2d5062ac1981b0a1c936d1fd917321a7631635bf[m
+Author: heejin2dat@naver.com <heejin2dat@naver.com>
+Date:   Mon Nov 4 18:17:14 2024 +0900
+
+    myblog 첫번째 저장
+
+[33mcommit 91bdfbab0b6e1f895a2234a90199a49c72f484af[m
+Author: codeNkey <157748223+codeNkey@users.noreply.github.com>
+Date:   Mon Nov 4 18:16:04 2024 +0900
+
+    Initial commit
